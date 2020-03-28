@@ -25,7 +25,6 @@ k=0
 wordpath=None
 a = len(words)
 sample = False
-
 while True and i<a:
     if i==0:
         wordpath = os.path.join(gesturepath,words[i])
@@ -54,9 +53,27 @@ while True and i<a:
         cv2.imwrite(os.path.join(wordpath,str(k)+".png"), hand2)
         k = k + 1
 
+    if key==ord("p"):
+        i = i - 1
+        try:
+            try:
+                cv2.destroyWindow("sample")
+            except:
+                pass
+            wordpath = os.path.join(gesturepath,words[i])
+            makedir(wordpath)
+            sample = False
+            k=len(os.listdir(wordpath))
+        except:
+            print("pass")
+
     if key==ord("n"):
         i = i+1
         try:
+            try:
+                cv2.destroyWindow("sample")
+            except:
+                pass
             wordpath = os.path.join(gesturepath,words[i])
             makedir(wordpath)
             sample = False
