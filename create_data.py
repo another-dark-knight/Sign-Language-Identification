@@ -25,11 +25,11 @@ k=0
 wordpath=None
 a = len(words)
 sample = False
+
+wordpath = os.path.join(gesturepath,words[0])
+makedir(wordpath)
+k = len(os.listdir(wordpath))     
 while True and i<a:
-    if i==0:
-        wordpath = os.path.join(gesturepath,words[i])
-        makedir(wordpath)
-        k = len(os.listdir(wordpath))     
     ret, frame = cap.read()
     
     if k!=0 and sample is False:
