@@ -25,10 +25,13 @@ k=0
 wordpath=None
 a = len(words)
 sample = False
+timer = False
 
 wordpath = os.path.join(gesturepath,words[0])
 makedir(wordpath)
 k = len(os.listdir(wordpath))     
+
+
 while True and i<a:
     ret, frame = cap.read()
     
@@ -46,14 +49,26 @@ while True and i<a:
     cv2.imshow("stream", frame)
     cv2.imshow("hand",hand2)
     key = cv2.waitKey(1) & 0xFF
+    
+    if timer is True:
+        print("Capturing")
+        cv2.imwrite(os.path.join(wordpath,str(k)+".png"), hand)
+        k = k + 1
+        cv2.imwrite(os.path.join(wordpath,str(k)+".png"), hand2)
+        k = k + 1
+
+    if key == ord("t"):
+        timer = not timer
 
     if key == ord("c"):
+        timer = False
         cv2.imwrite(os.path.join(wordpath,str(k)+".png"), hand)
         k = k + 1
         cv2.imwrite(os.path.join(wordpath,str(k)+".png"), hand2)
         k = k + 1
 
     if key==ord("p"):
+        timer = False
         i = i - 1
         try:
             try:
@@ -68,6 +83,7 @@ while True and i<a:
             print("pass")
 
     if key==ord("n"):
+        timer = False
         i = i+1
         try:
             try:
